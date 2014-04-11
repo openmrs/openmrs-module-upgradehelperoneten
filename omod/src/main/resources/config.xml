@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module configVersion="1.2">
+
+    <!-- Base Module Properties -->
+    <id>${project.parent.artifactId}</id>
+    <name>${project.parent.name}</name>
+    <version>${project.parent.version}</version>
+    <package>${project.parent.groupId}.${project.parent.artifactId}</package>
+    <author>OpenMRS</author>
+    <description>
+        ${project.parent.description}
+    </description>
+
+    <activator>${project.parent.groupId}.${project.parent.artifactId}.UpgradeHelperOneTenActivator</activator>
+
+    <!-- /Base Module Properties -->
+    <require_version>${openMRSVersion}</require_version>
+
+    <!-- Internationalization -->
+    <!-- All message codes should start with @MODULE_ID@.* -->
+    <messages>
+        <lang>en</lang>
+        <file>messages.properties</file>
+    </messages>
+
+    <extension>
+        <point>org.openmrs.admin.list</point>
+        <class>org.openmrs.module.upgradehelperoneten.extension.html.AdminExt</class>
+    </extension>
+
+</module>
+

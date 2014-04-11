@@ -1,0 +1,26 @@
+#mm table {
+    border-collapse:collapse;
+    margin: 15px 15px 30px;
+}
+
+#mm h2 {
+    margin: 15px 15px 10px;
+}
+
+#mm td {
+    border: 1px solid black;
+    padding: 2px;
+}
+
+#mm td {
+    border: 1px solid black;
+    padding: 2px;
+}
+
+td.text {
+    min-width: 120px;
+}
+
+.buttons {
+    margin: 15px;
+}
