@@ -16,41 +16,43 @@ package org.openmrs.module.upgradehelperoneten;
 import org.openmrs.DrugOrder;
 
 public class DoseToConceptMapping {
-
-    private String text;
-    private Integer conceptId;
-    private Boolean isFrequencyMapping;
-
-    public DoseToConceptMapping(DrugOrder d, boolean isFrequencyMapping) {
-        if (isFrequencyMapping) {
-            text = d.getFrequency();
-        } else {
-            text = d.getUnits();
-        }
-        this.isFrequencyMapping = isFrequencyMapping;
-    }
-
-    public Integer getConceptId() {
-        return conceptId;
-    }
-
-    public void setConceptId(Integer conceptId) {
-        this.conceptId = conceptId;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public Boolean getIsFrequencyMapping() {
-        return isFrequencyMapping;
-    }
-
-    public void setIsFrequencyMapping(Boolean isFrequencyMapping) {
-        this.isFrequencyMapping = isFrequencyMapping;
-    }
+	
+	private String text;
+	
+	private Integer conceptId;
+	
+	private Boolean isFrequencyMapping;
+	
+	public DoseToConceptMapping(DrugOrder d, boolean isFrequencyMapping) {
+		if (isFrequencyMapping) {
+			text = d.getFrequency();
+		} else {
+			text = d.getUnits();
+		}
+		this.isFrequencyMapping = isFrequencyMapping;
+	}
+	
+	public Integer getConceptId() {
+		return conceptId;
+	}
+	
+	public void setConceptId(Integer conceptId) {
+		this.conceptId = conceptId;
+	}
+	
+	public String getText() {
+		return text;
+	}
+	
+	public void setText(String text) {
+		this.text = text;
+	}
+	
+	public Boolean getIsFrequencyMapping() {
+		return isFrequencyMapping;
+	}
+	
+	public void setIsFrequencyMapping(Boolean isFrequencyMapping) {
+		this.isFrequencyMapping = isFrequencyMapping;
+	}
 }

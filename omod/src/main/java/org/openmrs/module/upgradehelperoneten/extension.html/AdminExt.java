@@ -20,18 +20,18 @@ import org.openmrs.module.Extension;
 import org.openmrs.module.web.extension.AdministrationSectionExt;
 
 public class AdminExt extends AdministrationSectionExt {
-
-    public Extension.MEDIA_TYPE getMediaType()  {
-        return Extension.MEDIA_TYPE.html;
-    }
-
-    public String getTitle() {
-        return "upgradehelperoneten.title";
-    }
-
-    public Map<String, String> getLinks() {
-        Map<String, String> map = new LinkedHashMap<String, String>();
-        map.put("module/upgradehelperoneten/MapDoseToConcepts.form", "upgradehelperoneten.mapDoseToConcepts");
-        return map;
-    }
+	
+	public Extension.MEDIA_TYPE getMediaType() {
+		return Extension.MEDIA_TYPE.html;
+	}
+	
+	public String getTitle() {
+		return "upgradehelperoneten.title";
+	}
+	
+	public Map<String, String> getLinks() {
+		Map<String, String> map = new LinkedHashMap<String, String>();
+		map.put("module/upgradehelperoneten/MapDoseToConcepts.form", "upgradehelperoneten.mapDoseToConcepts");
+		return map;
+	}
 }

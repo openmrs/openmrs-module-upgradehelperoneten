@@ -17,14 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MappingsModel {
-
-    private List<DoseToConceptMapping> mappings = new ArrayList<DoseToConceptMapping>();
-
-    public List<DoseToConceptMapping> getMappings() {
-        return mappings;
-    }
-
-    public void setMappings(List<DoseToConceptMapping> mappings) {
-        this.mappings = mappings;
-    }
+	
+	private List<DoseToConceptMapping> mappings = new ArrayList<DoseToConceptMapping>();
+	
+	public List<DoseToConceptMapping> getMappings() {
+		return mappings;
+	}
+	
+	public void setMappings(List<DoseToConceptMapping> mappings) {
+		this.mappings = mappings;
+	}
 }

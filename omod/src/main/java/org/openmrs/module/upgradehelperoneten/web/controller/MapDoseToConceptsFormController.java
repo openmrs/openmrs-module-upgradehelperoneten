@@ -38,111 +38,117 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * This class configured as controller using annotation and mapped with the URL of 'module/upgradehelperoneten/MapDoseToConcepts.form'.
+ * This class configured as controller using annotation and mapped with the URL of
+ * 'module/upgradehelperoneten/MapDoseToConcepts.form'.
  */
 @Controller
 @RequestMapping(value = "module/upgradehelperoneten/MapDoseToConcepts.form")
 public class MapDoseToConceptsFormController {
-    /** Logger for this class and subclasses */
-    protected final Log log = LogFactory.getLog(getClass());
-
-    /** Success form view name */
-    private final String FORM_VIEW = "/module/upgradehelperoneten/MapDoseToConceptsForm";
-
-    /** Path for storing properties */
-    private final String path = OpenmrsUtil.getApplicationDataDirectory() + "order_entry_upgrade_settings.txt";
-
-    /**
-     * Initially called after the formBackingObject method to get the landing form name
-     * @return String form view name
-     */
-    @RequestMapping(method = RequestMethod.GET)
-    public String showForm() {
-        return FORM_VIEW;
-    }
-
-    /**
-     * @param httpSession
-     * @param mm
-     * @param errors
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST)
-    public String onSubmit(HttpSession httpSession,
-                           @ModelAttribute("mm") MappingsModel mm, BindingResult errors) {
-
-        Properties props = new Properties();
-        try {
-            // create properties file if it doesn't exist
-            File f = new File(path);
-            if (!f.exists()) {
-                f.createNewFile();
-            }
-            List<DoseToConceptMapping> mappings =  mm.getMappings();
-            // store the properties
-            for (DoseToConceptMapping m : mappings) {
-                if(m.getConceptId() != null) {
-                    props.setProperty(m.getText(), m.getConceptId().toString());
-                }
-            }
-            props.store(new FileOutputStream(path), null);
-        } catch (Exception e) {
-            httpSession.setAttribute(WebConstants.OPENMRS_ERROR_ATTR,
-                    "An error occurred while storing the properties: " + e.getMessage());
-            return FORM_VIEW;
-        }
-
-        httpSession.setAttribute(WebConstants.OPENMRS_MSG_ATTR, "upgradehelperoneten.mappings.saved");
-        return FORM_VIEW;
-    }
-
-    @ModelAttribute("mm")
-    protected MappingsModel formBackingObject(HttpServletRequest request) {
-
-        Collection<DrugOrder> drugOrders = Context.getOrderService().getOrders(DrugOrder.class, null, null, null, null, null, null);
-
-        // Spring is designed to work with a single form object
-        MappingsModel mm = new MappingsModel();
-        List<DoseToConceptMapping> mappings = mm.getMappings();
-        Properties props = new Properties();
-
-        try {
-            // create properties file if it doesn't exist
-            File f = new File(path);
-            if (!f.exists()) {
-                f.createNewFile();
-            }
-            // load the properties
-            props.load(new FileInputStream(path));
-
-            for(DrugOrder d : drugOrders) {
-                if (d.getUnits() != null) {
-                    DoseToConceptMapping unitsMapping = new DoseToConceptMapping(d, false);
-                    String unitsConceptId = props.getProperty(d.getUnits());
-                    if (unitsConceptId != null) {
-                        unitsMapping.setConceptId(Integer.valueOf(unitsConceptId));
-                    }
-                    mappings.add(unitsMapping);
-                }
-                if (d.getFrequency() != null) {
-                    DoseToConceptMapping frequencyMapping = new DoseToConceptMapping(d, true);
-                    String frequencyConceptId = props.getProperty(d.getFrequency());
-                    if (frequencyConceptId != null) {
-                        frequencyMapping.setConceptId(Integer.valueOf(frequencyConceptId));
-                    }
-                    mappings.add(frequencyMapping);
-                }
-            }
-
-            return mm;
-        } catch (NumberFormatException e) {
-            request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR,
-                    "The order entry upgrade settings file contains invalid concept ids");
-        } catch (Exception e) {
-            log.warn("Error:", e);
-            request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR, "Some error occurred, see logs");
-        }
-        return null;
-    }
-
+	
+	/** Logger for this class and subclasses */
+	protected final Log log = LogFactory.getLog(getClass());
+	
+	/** Success form view name */
+	private final String FORM_VIEW = "/module/upgradehelperoneten/MapDoseToConceptsForm";
+	
+	/** Path for storing properties */
+	private final String path = OpenmrsUtil.getApplicationDataDirectory() + "order_entry_upgrade_settings.txt";
+	
+	/**
+	 * Initially called after the formBackingObject method to get the landing form name
+	 * 
+	 * @return String form view name
+	 */
+	@RequestMapping(method = RequestMethod.GET)
+	public String showForm() {
+		return FORM_VIEW;
+	}
+	
+	/**
+	 * @param httpSession
+	 * @param mm
+	 * @param errors
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.POST)
+	public String onSubmit(HttpSession httpSession, @ModelAttribute("mm") MappingsModel mm, BindingResult errors) {
+		
+		Properties props = new Properties();
+		try {
+			// create properties file if it doesn't exist
+			File f = new File(path);
+			if (!f.exists()) {
+				f.createNewFile();
+			}
+			List<DoseToConceptMapping> mappings = mm.getMappings();
+			// store the properties
+			for (DoseToConceptMapping m : mappings) {
+				if (m.getConceptId() != null) {
+					props.setProperty(m.getText(), m.getConceptId().toString());
+				}
+			}
+			props.store(new FileOutputStream(path), null);
+		}
+		catch (Exception e) {
+			httpSession.setAttribute(WebConstants.OPENMRS_ERROR_ATTR,
+			    "An error occurred while storing the properties: " + e.getMessage());
+			return FORM_VIEW;
+		}
+		
+		httpSession.setAttribute(WebConstants.OPENMRS_MSG_ATTR, "upgradehelperoneten.mappings.saved");
+		return FORM_VIEW;
+	}
+	
+	@ModelAttribute("mm")
+	protected MappingsModel formBackingObject(HttpServletRequest request) {
+		
+		Collection<DrugOrder> drugOrders = Context.getOrderService().getOrders(DrugOrder.class, null, null, null, null,
+		    null, null);
+		
+		// Spring is designed to work with a single form object
+		MappingsModel mm = new MappingsModel();
+		List<DoseToConceptMapping> mappings = mm.getMappings();
+		Properties props = new Properties();
+		
+		try {
+			// create properties file if it doesn't exist
+			File f = new File(path);
+			if (!f.exists()) {
+				f.createNewFile();
+			}
+			// load the properties
+			props.load(new FileInputStream(path));
+			
+			for (DrugOrder d : drugOrders) {
+				if (d.getUnits() != null) {
+					DoseToConceptMapping unitsMapping = new DoseToConceptMapping(d, false);
+					String unitsConceptId = props.getProperty(d.getUnits());
+					if (unitsConceptId != null) {
+						unitsMapping.setConceptId(Integer.valueOf(unitsConceptId));
+					}
+					mappings.add(unitsMapping);
+				}
+				if (d.getFrequency() != null) {
+					DoseToConceptMapping frequencyMapping = new DoseToConceptMapping(d, true);
+					String frequencyConceptId = props.getProperty(d.getFrequency());
+					if (frequencyConceptId != null) {
+						frequencyMapping.setConceptId(Integer.valueOf(frequencyConceptId));
+					}
+					mappings.add(frequencyMapping);
+				}
+			}
+			
+			return mm;
+		}
+		catch (NumberFormatException e) {
+			request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR,
+			    "The order entry upgrade settings file contains invalid concept ids");
+		}
+		catch (Exception e) {
+			log.warn("Error:", e);
+			request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR, "Some error occurred, see logs");
+		}
+		return null;
+	}
+	
 }
