@@ -13,7 +13,6 @@
  */
 package org.openmrs.module.upgradehelperoneten;
 
-import org.openmrs.Concept;
 import org.openmrs.DrugOrder;
 
 public class DoseToConceptMapping {
@@ -29,10 +28,6 @@ public class DoseToConceptMapping {
             text = d.getUnits();
         }
         this.isFrequencyMapping = isFrequencyMapping;
-    }
-
-    public DoseToConceptMapping(String text) {
-        this.text = text;
     }
 
     public Integer getConceptId() {

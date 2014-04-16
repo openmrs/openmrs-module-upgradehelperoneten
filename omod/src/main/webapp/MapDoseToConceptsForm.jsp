@@ -4,10 +4,12 @@
 
 <openmrs:htmlInclude file="/moduleResources/upgradehelperoneten/MapDoseToConcepts.css"/>
 
+<h2><openmrs:message code="upgradehelperoneten.form.title"/></h2>
+<br/>
 <form:form modelAttribute="mm" method="post">
     <fieldset>
 
-        <table>
+        <table cellpadding="5" cellspacing="5" border="0">
             <tr>
                 <th><spring:message code="upgradehelperoneten.text" /></th>
                 <th><spring:message code="upgradehelperoneten.concept" /></th>
@@ -15,10 +17,14 @@
             <c:forEach var="m" items="${mm.mappings}" varStatus="s">
                 <tr>
                     <td class="text">${m.text}</td>
-                    <td class="contept">
+                    <td class="concept">
                         <spring:bind path="mappings[${s.index}].conceptId">
-                            <openmrs_tag:conceptField formFieldName="${status.expression}" formFieldId="unitsConcept${s.index}" initialValue="${status.value}" includeClasses="${m.isFrequencyMapping ? 'Frequency' : 'Units Of Measure'}" />
-                            <c:if test="${status.errorMessage != ''}"><span class="error">${status.errorMessage}</span></c:if>
+                            <openmrs_tag:conceptField formFieldName="${status.expression}"
+                                                      formFieldId="unitsConcept${s.index}" initialValue="${status.value}"
+                                                      includeClasses="${m.isFrequencyMapping ? 'Frequency' : 'Units Of Measure'}" />
+                            <c:if test="${status.errorMessage != ''}">
+                                <span class="error">${status.errorMessage}</span>
+                            </c:if>
                         </spring:bind>
                     </td>
                 </tr>

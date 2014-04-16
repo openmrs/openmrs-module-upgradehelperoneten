@@ -114,14 +114,8 @@ public class MapDoseToConceptsFormController {
             }
             // load the properties
             props.load(new FileInputStream(path));
-        } catch (Exception e) {
-            // could not load or create properties
-            request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR, e.getMessage());
-            return null;
-        }
 
-        for(DrugOrder d : drugOrders) {
-            try {
+            for(DrugOrder d : drugOrders) {
                 if (d.getUnits() != null) {
                     DoseToConceptMapping unitsMapping = new DoseToConceptMapping(d, false);
                     String unitsConceptId = props.getProperty(d.getUnits());
@@ -138,13 +132,17 @@ public class MapDoseToConceptsFormController {
                     }
                     mappings.add(frequencyMapping);
                 }
-            } catch (NumberFormatException e) {
-                request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR,
-                        "The order entry upgrade settings file contains invalid mapping: " + e.getMessage());
-                return null;
             }
+
+            return mm;
+        } catch (NumberFormatException e) {
+            request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR,
+                    "The order entry upgrade settings file contains invalid concept ids");
+        } catch (Exception e) {
+            log.warn("Error:", e);
+            request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR, "Some error occurred, see logs");
         }
-        return mm;
+        return null;
     }
 
 }

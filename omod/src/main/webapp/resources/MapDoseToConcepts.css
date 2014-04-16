@@ -7,18 +7,9 @@
     margin: 15px 15px 10px;
 }
 
-#mm td {
-    border: 1px solid black;
-    padding: 2px;
-}
-
-#mm td {
-    border: 1px solid black;
-    padding: 2px;
-}
-
 td.text {
     min-width: 120px;
+    text-align: right;
 }
 
 .buttons {
