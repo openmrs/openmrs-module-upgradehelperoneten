@@ -32,6 +32,7 @@ public class AdminExt extends AdministrationSectionExt {
 	public Map<String, String> getLinks() {
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		map.put("module/upgradehelperoneten/MapDoseToConcepts.form", "upgradehelperoneten.mapDoseToConcepts");
+		map.put("http://bit.ly/1kaQRLT", "upgradehelperoneten.howtoimportpackages");
 		return map;
 	}
 }
