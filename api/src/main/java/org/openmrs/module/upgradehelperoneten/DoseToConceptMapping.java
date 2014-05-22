@@ -19,7 +19,7 @@ public class DoseToConceptMapping {
 	
 	private String text;
 	
-	private Integer conceptId;
+	private String conceptId;
 	
 	private Boolean isFrequencyMapping;
 	
@@ -32,11 +32,11 @@ public class DoseToConceptMapping {
 		this.isFrequencyMapping = isFrequencyMapping;
 	}
 	
-	public Integer getConceptId() {
+	public String getConceptId() {
 		return conceptId;
 	}
 	
-	public void setConceptId(Integer conceptId) {
+	public void setConceptId(String conceptId) {
 		this.conceptId = conceptId;
 	}
 	
@@ -54,5 +54,10 @@ public class DoseToConceptMapping {
 	
 	public void setIsFrequencyMapping(Boolean isFrequencyMapping) {
 		this.isFrequencyMapping = isFrequencyMapping;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		return getText().equals(((DoseToConceptMapping) o).getText());
 	}
 }

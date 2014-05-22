@@ -21,7 +21,7 @@
                         <spring:bind path="mappings[${s.index}].conceptId">
                             <openmrs_tag:conceptField formFieldName="${status.expression}"
                                                       formFieldId="unitsConcept${s.index}" initialValue="${status.value}"
-                                                      includeClasses="${m.isFrequencyMapping ? 'Frequency' : 'Units Of Measure'}" />
+                                                      includeClasses="${m.isFrequencyMapping ? 'Frequency' : ''}" />
                             <c:if test="${status.errorMessage != ''}">
                                 <span class="error">${status.errorMessage}</span>
                             </c:if>

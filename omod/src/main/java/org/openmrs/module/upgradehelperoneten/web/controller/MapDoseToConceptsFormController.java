@@ -23,6 +23,7 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.DrugOrder;
@@ -83,7 +84,7 @@ public class MapDoseToConceptsFormController {
 			List<DoseToConceptMapping> mappings = mm.getMappings();
 			// store the properties
 			for (DoseToConceptMapping m : mappings) {
-				if (m.getConceptId() != null) {
+				if (StringUtils.isNotBlank(m.getText()) && StringUtils.isNotBlank(m.getConceptId())) {
 					props.setProperty(m.getText(), m.getConceptId().toString());
 				}
 			}
@@ -124,17 +125,20 @@ public class MapDoseToConceptsFormController {
 					DoseToConceptMapping unitsMapping = new DoseToConceptMapping(d, false);
 					String unitsConceptId = props.getProperty(d.getUnits());
 					if (unitsConceptId != null) {
-						unitsMapping.setConceptId(Integer.valueOf(unitsConceptId));
+						//sanity check
+						Integer.valueOf(unitsConceptId);
+						unitsMapping.setConceptId(unitsConceptId);
 					}
-					mappings.add(unitsMapping);
+					addMapping(mappings, unitsMapping);
 				}
 				if (d.getFrequency() != null) {
 					DoseToConceptMapping frequencyMapping = new DoseToConceptMapping(d, true);
 					String frequencyConceptId = props.getProperty(d.getFrequency());
 					if (frequencyConceptId != null) {
-						frequencyMapping.setConceptId(Integer.valueOf(frequencyConceptId));
+						Integer.valueOf(frequencyConceptId);
+						frequencyMapping.setConceptId(frequencyConceptId);
 					}
-					mappings.add(frequencyMapping);
+					addMapping(mappings, frequencyMapping);
 				}
 			}
 			
@@ -151,4 +155,9 @@ public class MapDoseToConceptsFormController {
 		return null;
 	}
 	
+	private void addMapping(List<DoseToConceptMapping> mappings, DoseToConceptMapping mapping) {
+		if (!mappings.contains(mapping)) {
+			mappings.add(mapping);
+		}
+	}
 }
