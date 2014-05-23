@@ -16,6 +16,7 @@ package org.openmrs.module.upgradehelperoneten.extension.html;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.openmrs.Order;
 import org.openmrs.module.Extension;
 import org.openmrs.module.web.extension.AdministrationSectionExt;
 
@@ -31,8 +32,23 @@ public class AdminExt extends AdministrationSectionExt {
 	
 	public Map<String, String> getLinks() {
 		Map<String, String> map = new LinkedHashMap<String, String>();
-		map.put("module/upgradehelperoneten/MapDoseToConcepts.form", "upgradehelperoneten.mapDoseToConcepts");
+		//No need to show the mapping page if they are have a already upgraded to a 1.10+ version
+		//Can't use version comparison in older versions of openmrs because it is buggy
+		//So we use some hacky code to check if this is a 1.10.0+ version
+		if (!isOneTenOrLater()) {
+			map.put("module/upgradehelperoneten/MapDoseToConcepts.form", "upgradehelperoneten.mapDoseToConcepts");
+		}
 		map.put("http://bit.ly/1kaQRLT", "upgradehelperoneten.howtoimportpackages");
 		return map;
+	}
+	
+	private boolean isOneTenOrLater() {
+		try {
+			return Order.class.getDeclaredMethod("getOrderNumber") != null;
+		}
+		catch (NoSuchMethodException e) {
+			//ignore
+		}
+		return false;
 	}
 }
