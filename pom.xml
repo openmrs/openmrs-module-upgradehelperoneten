@@ -21,10 +21,10 @@
 		<url>http://openmrs.org</url>
 	</organization>
 
-	<scm>
-        <connection>scm:git:git@github.com:openmrs/openmrs-module-upgradehelperoneten.git</connection>
-        <developerConnection>scm:git:git@github.com:openmrs/openmrs-module-upgradehelperoneten.git</developerConnection>
-        <url>scm:git:git@github.com:openmrs/openmrs-module-upgradehelperoneten.git</url>
+    <scm>
+        <connection>scm:git:https://github.com/openmrs/openmrs-module-upgradehelperoneten</connection>
+        <developerConnection>scm:git:https://github.com/openmrs/openmrs-module-upgradehelperoneten</developerConnection>
+        <url>https://github.com/openmrs/openmrs-module-upgradehelperoneten</url>
     </scm>
 
 	<modules>
