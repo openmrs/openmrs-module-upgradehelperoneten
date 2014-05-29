@@ -6,6 +6,14 @@
 
 <h2><openmrs:message code="upgradehelperoneten.form.title"/></h2>
 <br/>
+<div class="info">
+    <img src="<openmrs:contextPath />/images/info.gif" border="0" />
+    If you are using CIEL dictionary, make sure that you are running the latest version to have the
+    frequency and dosing units concepts. If you are not using CIEL, You can import the concepts by
+    downloading the order entry concept metadata package <a href="http://tinyurl.com/mga37qu">here</a>
+    and importing it using the <a href="http://bit.ly/1kaQRLT">metadata sharing module</a>
+</div>
+<br/>
 <form:form modelAttribute="mm" method="post">
     <fieldset>
 
@@ -13,6 +21,7 @@
             <tr>
                 <th><spring:message code="upgradehelperoneten.text" /></th>
                 <th><spring:message code="upgradehelperoneten.concept" /></th>
+                <th><spring:message code="upgradehelperoneten.isFrequency" /></th>
             </tr>
             <c:forEach var="m" items="${mm.mappings}" varStatus="s">
                 <tr>
@@ -26,6 +35,9 @@
                                 <span class="error">${status.errorMessage}</span>
                             </c:if>
                         </spring:bind>
+                    </td>
+                    <td class="isFrequency">
+                        <spring:message code="${m.isFrequencyMapping ? 'general.yes' : 'general.no'}" />
                     </td>
                 </tr>
             </c:forEach>

@@ -37,8 +37,9 @@ public class AdminExt extends AdministrationSectionExt {
 		//So we use some hacky code to check if this is a 1.10.0+ version
 		if (!isOneTenOrLater()) {
 			map.put("module/upgradehelperoneten/MapDoseToConcepts.form", "upgradehelperoneten.mapDoseToConcepts");
+		} else {
+			map.put("#", "<span style='color:#ff0000'>Module is not needed</a>");
 		}
-		map.put("http://bit.ly/1kaQRLT", "upgradehelperoneten.howtoimportpackages");
 		return map;
 	}
 	

@@ -8,10 +8,29 @@
 }
 
 td.text {
-    min-width: 120px;
+    min-width: 150px;
+}
+
+td.text, td.concept {
     text-align: right;
+}
+
+td.isFrequency {
+    text-align: center;
+}
+
+td.concept input {
+    min-width: 220px;
 }
 
 .buttons {
     margin: 15px;
+}
+
+.info {
+    text-align: left;
+    border: 1px dashed lightgrey;
+    padding: 5px;
+    background: url(images/info.gif) no-repeat center left;
+    background-color: lightyellow;
 }
