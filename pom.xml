@@ -4,7 +4,7 @@
 
 	<groupId>org.openmrs.module</groupId>
 	<artifactId>upgradehelperoneten</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>pom</packaging>
 	<name>Prepare For Upgrade To 1.10 Module</name>
 	<description>Provides metadata and and tools that can be used to prepare for the OpenMRS 1.10 API upgrade</description>
@@ -25,7 +25,7 @@
         <connection>scm:git:https://github.com/openmrs/openmrs-module-upgradehelperoneten</connection>
         <developerConnection>scm:git:https://github.com/openmrs/openmrs-module-upgradehelperoneten</developerConnection>
         <url>https://github.com/openmrs/openmrs-module-upgradehelperoneten</url>
-        <tag>HEAD</tag>
+        <tag>1.0</tag>
     </scm>
 
 	<modules>
