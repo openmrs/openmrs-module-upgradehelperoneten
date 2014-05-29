@@ -22,9 +22,9 @@
 	</organization>
 
 	<scm>
-        <connection>scm:git@github.com:openmrs/openmrs-module-upgradehelperoneten.git</connection>
-        <developerConnection>scm:git@github.com:openmrs/openmrs-module-upgradehelperoneten.git</developerConnection>
-        <url>scm:git@github.com:openmrs/openmrs-module-upgradehelperoneten.git</url>
+        <connection>scm:git:git@github.com:openmrs/openmrs-module-upgradehelperoneten.git</connection>
+        <developerConnection>scm:git:git@github.com:openmrs/openmrs-module-upgradehelperoneten.git</developerConnection>
+        <url>scm:git:git@github.com:openmrs/openmrs-module-upgradehelperoneten.git</url>
     </scm>
 
 	<modules>
