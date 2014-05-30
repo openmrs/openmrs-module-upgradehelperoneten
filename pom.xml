@@ -7,8 +7,8 @@
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Prepare For Upgrade To 1.10 Module</name>
-	<description>Provides metadata and and tools that can be used to prepare for the OpenMRS 1.10 API upgrade</description>
-	<url>https://wiki.openmrs.org/display/docs/Prepare+For+Upgrade+To+1.10+Module+Module</url>
+	<description>Provides a tool for mapping free text frequencies and dose units before upgrading from a pre 1.10 to a 1.10 or later version</description>
+	<url>https://wiki.openmrs.org/display/docs/Prepare+For+Upgrade+To+1.10+Module</url>
 	
 	<developers>
 		<developer>
