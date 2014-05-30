@@ -4,7 +4,7 @@
 
 	<groupId>org.openmrs.module</groupId>
 	<artifactId>upgradehelperoneten</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>pom</packaging>
 	<name>Prepare For Upgrade To 1.10 Module</name>
 	<description>Provides a tool for mapping free text frequencies and dose units before upgrading from a pre 1.10 to a 1.10 or later version</description>
@@ -25,7 +25,7 @@
         <connection>scm:git:https://github.com/openmrs/openmrs-module-upgradehelperoneten</connection>
         <developerConnection>scm:git:https://github.com/openmrs/openmrs-module-upgradehelperoneten</developerConnection>
         <url>https://github.com/openmrs/openmrs-module-upgradehelperoneten</url>
-        <tag>HEAD</tag>
+        <tag>1.0</tag>
     </scm>
 
 	<modules>
