@@ -25,22 +25,12 @@
             <scope>compile</scope>
         </dependency>
         -->
-        <!-- Begin OpenMRS modules -->
+
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>upgradehelperoneten-api</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-
-        <!-- Begin OpenMRS modules -->
-
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>metadatasharing-api</artifactId>
-            <version>${metadatasharingModuleVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- End OpenMRS modules -->
 
         <!-- Begin OpenMRS core -->
 

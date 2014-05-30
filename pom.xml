@@ -35,7 +35,6 @@
 	
 	<properties>
 		<openMRSVersion>1.7.0</openMRSVersion>
-        <metadatasharingModuleVersion>1.0.7</metadatasharingModuleVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -51,16 +50,6 @@
             <scope>compile</scope>
         </dependency>
         -->
-
-        <!-- Begin OpenMRS modules -->
-
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>metadatasharing-api</artifactId>
-            <version>${metadatasharingModuleVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- End OpenMRS modules -->
 
         <!-- Begin OpenMRS core -->
 

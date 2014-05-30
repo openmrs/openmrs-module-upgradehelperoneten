@@ -26,17 +26,6 @@
         </dependency>
         -->
 
-        <!-- Begin OpenMRS modules -->
-
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>metadatasharing-api</artifactId>
-            <version>${metadatasharingModuleVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- End OpenMRS modules -->
-
         <!-- Begin OpenMRS core -->
 
         <dependency>
