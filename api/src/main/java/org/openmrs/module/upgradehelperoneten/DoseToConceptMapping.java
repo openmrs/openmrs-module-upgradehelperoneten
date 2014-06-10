@@ -13,8 +13,6 @@
  */
 package org.openmrs.module.upgradehelperoneten;
 
-import org.openmrs.DrugOrder;
-
 public class DoseToConceptMapping {
 	
 	private String text;
@@ -23,12 +21,8 @@ public class DoseToConceptMapping {
 	
 	private Boolean isFrequencyMapping;
 	
-	public DoseToConceptMapping(DrugOrder d, boolean isFrequencyMapping) {
-		if (isFrequencyMapping) {
-			text = d.getFrequency();
-		} else {
-			text = d.getUnits();
-		}
+	public DoseToConceptMapping(String freeText, boolean isFrequencyMapping) {
+		text = freeText;
 		this.isFrequencyMapping = isFrequencyMapping;
 	}
 	

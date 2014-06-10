@@ -16,9 +16,10 @@ package org.openmrs.module.upgradehelperoneten.web.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,14 +27,12 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.DrugOrder;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.upgradehelperoneten.DoseToConceptMapping;
 import org.openmrs.module.upgradehelperoneten.MappingsModel;
 import org.openmrs.util.OpenmrsUtil;
 import org.openmrs.web.WebConstants;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -68,11 +67,10 @@ public class MapDoseToConceptsFormController {
 	/**
 	 * @param httpSession
 	 * @param mm
-	 * @param errors
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public String onSubmit(HttpSession httpSession, @ModelAttribute("mm") MappingsModel mm, BindingResult errors) {
+	public String onSubmit(HttpSession httpSession, @ModelAttribute("mm") MappingsModel mm) {
 		
 		Properties props = new Properties();
 		try {
@@ -103,15 +101,13 @@ public class MapDoseToConceptsFormController {
 	@ModelAttribute("mm")
 	protected MappingsModel formBackingObject(HttpServletRequest request) {
 		
-		Collection<DrugOrder> drugOrders = Context.getOrderService().getOrders(DrugOrder.class, null, null, null, null,
-		    null, null);
-		
 		// Spring is designed to work with a single form object
 		MappingsModel mm = new MappingsModel();
 		List<DoseToConceptMapping> mappings = mm.getMappings();
 		Properties props = new Properties();
 		
 		try {
+			Set<String> units = getUniqueNonNullColumnValues("units", "drug_order");
 			// create properties file if it doesn't exist
 			File f = new File(path);
 			if (!f.exists()) {
@@ -120,26 +116,26 @@ public class MapDoseToConceptsFormController {
 			// load the properties
 			props.load(new FileInputStream(path));
 			
-			for (DrugOrder d : drugOrders) {
-				if (d.getUnits() != null) {
-					DoseToConceptMapping unitsMapping = new DoseToConceptMapping(d, false);
-					String unitsConceptId = props.getProperty(d.getUnits());
-					if (unitsConceptId != null) {
-						//sanity check
-						Integer.valueOf(unitsConceptId);
-						unitsMapping.setConceptId(unitsConceptId);
-					}
-					addMapping(mappings, unitsMapping);
+			for (String unit : units) {
+				DoseToConceptMapping unitsMapping = new DoseToConceptMapping(unit, false);
+				String unitsConceptId = props.getProperty(unit);
+				if (unitsConceptId != null) {
+					//sanity check
+					Integer.valueOf(unitsConceptId);
+					unitsMapping.setConceptId(unitsConceptId);
 				}
-				if (d.getFrequency() != null) {
-					DoseToConceptMapping frequencyMapping = new DoseToConceptMapping(d, true);
-					String frequencyConceptId = props.getProperty(d.getFrequency());
-					if (frequencyConceptId != null) {
-						Integer.valueOf(frequencyConceptId);
-						frequencyMapping.setConceptId(frequencyConceptId);
-					}
-					addMapping(mappings, frequencyMapping);
+				addMapping(mappings, unitsMapping);
+			}
+			
+			Set<String> frequencies = getUniqueNonNullColumnValues("frequency", "drug_order");
+			for (String frequency : frequencies) {
+				DoseToConceptMapping frequencyMapping = new DoseToConceptMapping(frequency, true);
+				String frequencyConceptId = props.getProperty(frequency);
+				if (frequencyConceptId != null) {
+					Integer.valueOf(frequencyConceptId);
+					frequencyMapping.setConceptId(frequencyConceptId);
 				}
+				addMapping(mappings, frequencyMapping);
 			}
 			
 			return mm;
@@ -159,5 +155,27 @@ public class MapDoseToConceptsFormController {
 		if (!mappings.contains(mapping)) {
 			mappings.add(mapping);
 		}
+	}
+	
+	/**
+	 * Gets all unique values excluding nulls in the specified column and table
+	 * 
+	 * @param columnName the column
+	 * @param tableName the table
+	 * @return
+	 * @throws Exception
+	 */
+	private <T> Set<T> getUniqueNonNullColumnValues(String columnName, String tableName) throws Exception {
+		Set<T> uniqueValues = new HashSet<T>();
+		final String alias = "unique_values";
+		String select = "SELECT DISTINCT " + columnName + " AS " + alias + " FROM " + tableName + " WHERE " + columnName
+		        + " IS NOT NULL";
+		List<List<Object>> rows = Context.getAdministrationService().executeSQL(select, true);
+		for (List<Object> row : rows) {
+			//There can only be one column since we are selecting one
+			uniqueValues.add((T) row.get(0));
+		}
+		
+		return uniqueValues;
 	}
 }
