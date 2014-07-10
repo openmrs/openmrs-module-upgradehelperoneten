@@ -8,6 +8,12 @@
 <br/>
 <div class="info">
     <img src="<openmrs:contextPath />/images/info.gif" border="0" />
+    In earlier OpenMRS versions, drug units and frequencies were stored as free-text, but starting with
+    OpenMRS 1.10 these are stored using coded concepts. If your database includes drug orders, we need
+    you to indicate which concept should represent each unique free-text value shown below.
+    <br/>
+    OpenMRS recommends that you get the reference lists of unit and frequency concepts from the
+    <a href="https://wiki.openmrs.org/x/ww4JAg">CIEL dictionary</a> but in advanced use cases you can create your own concepts for this purpose.
     If you are using CIEL dictionary, make sure that you are running the latest version to have the
     frequency and dosing units concepts. If you are not using CIEL, You can import the concepts by
     downloading the order entry concept metadata package <a href="http://tinyurl.com/mga37qu">here</a>
