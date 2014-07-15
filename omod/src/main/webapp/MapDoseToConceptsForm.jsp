@@ -16,8 +16,8 @@
     <a href="https://wiki.openmrs.org/x/ww4JAg">CIEL dictionary</a> but in advanced use cases you can create your own concepts for this purpose.
     If you are using CIEL dictionary, make sure that you are running the latest version to have the
     frequency and dosing units concepts. If you are not using CIEL, You can import the concepts by
-    downloading the order entry concept metadata package <a href="http://tinyurl.com/mga37qu">here</a>
-    and importing it using the <a href="http://bit.ly/1kaQRLT">metadata sharing module</a>
+    downloading the order entry concept metadata package <a href="https://wiki.openmrs.org/x/jALpAw">here</a>
+    and importing it using the <a href="https://wiki.openmrs.org/x/Xwo3AQ">metadata sharing module</a>
 </div>
 <br/>
 <form:form modelAttribute="mm" method="post">
